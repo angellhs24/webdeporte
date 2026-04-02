@@ -1,100 +1,79 @@
-// BASE DE DATOS LOCAL (Simulada)
-const LIGA_DATA = {
+const LIGA_DB = {
     sabado: [
-        { cancha: "Domo Municipal", hora: "08:00 AM", local: "RAYOS", visitante: "HALCONES", cat: "Varonil Libre" },
-        { cancha: "Cancha Anexa", hora: "09:30 AM", local: "CENTELLAS", visitante: "AZTECAS", cat: "Femenil" },
-        { cancha: "Domo Municipal", hora: "11:00 AM", local: "TITANES", visitante: "WARRIORS", cat: "Varonil Libre" }
+        { lugar: "Cancha Principal", hora: "09:00 AM", local: "VIEJOS LOBOS", visita: "EAGLES", cat: "Veteranos" },
+        { lugar: "Cancha 2", hora: "10:30 AM", local: "LINKERS B", visita: "BRUINS", cat: "Varonil B" }
     ],
     domingo: [
-        { cancha: "Domo Municipal", hora: "10:00 AM", local: "COBRAS", visitante: "LOBOS", cat: "Juvenil" },
-        { cancha: "Cancha Anexa", hora: "12:00 PM", local: "DIABLOS", visitante: "ASTROS", cat: "Veteranos" }
+        { lugar: "Cancha Principal", hora: "07:45 AM", local: "TITANES", visita: "AZTECAS", cat: "Varonil Libre" }
     ],
     sanciones: [
-        { sujeto: "Roberto M. (Bulls)", motivo: "Falta Técnica / Insultos", tiempo: "1 Juego", estado: "Pendiente" },
-        { sujeto: "Equipo 'Pumas'", motivo: "No presentarse (Forfeit)", tiempo: "Multa $300", estado: "Pagado" }
+        { nombre: "Carlos R. (Bruins)", motivo: "Falta Técnica Art. 47", castigo: "1 Partido", status: "Pendiente" }
     ]
 };
 
-// AL CARGAR EL DOCUMENTO
 document.addEventListener('DOMContentLoaded', () => {
-    setupNavigation();
-    renderSanciones();
-});
-
-// GESTIÓN DE NAVEGACIÓN
-function setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    // Manejo de navegación
+    const links = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
 
-    navLinks.forEach(link => {
+    links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const target = link.getAttribute('data-section');
 
-            // Actualizar estilo del enlace
-            navLinks.forEach(l => l.classList.remove('active'));
+            links.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
 
-            // Cambiar sección con animación
             sections.forEach(s => s.classList.remove('active'));
             
             if (target === 'sabado' || target === 'domingo') {
+                renderGames(target);
                 document.getElementById('partidos-view').classList.add('active');
-                renderPartidos(target);
             } else {
                 document.getElementById(target).classList.add('active');
             }
         });
     });
-}
 
-// RENDERIZADO DE PARTIDOS (TIPO FIXTURE)
-function renderPartidos(dia) {
-    const container = document.getElementById('games-grid');
+    renderSanciones();
+});
+
+function renderGames(dia) {
+    const container = document.getElementById('games-container');
     const title = document.getElementById('view-title');
-    
-    title.innerHTML = `ROL DE JUEGOS - ${dia.toUpperCase()}`;
-    container.innerHTML = ''; // Limpiar contenedor
+    title.innerText = `ROL DE JUEGOS - ${dia.toUpperCase()}`;
+    container.innerHTML = '';
 
-    LIGA_DATA[dia].forEach(match => {
-        const card = `
-            <div class="game-card">
-                <div class="game-meta">
-                    <span><i class="fas fa-map-pin"></i> ${match.cancha}</span>
-                    <span><i class="fas fa-clock"></i> ${match.hora}</span>
+    LIGA_DB[dia].forEach(g => {
+        container.innerHTML += `
+            <div class="news-item" style="border-left: 6px solid var(--orange)">
+                <div style="display:flex; justify-content: space-between; font-weight:bold; font-size:0.8rem; color:#666">
+                    <span>${g.lugar}</span>
+                    <span>${g.hora}</span>
                 </div>
-                <div class="game-teams">
-                    <div class="team">${match.local}</div>
-                    <div class="vs-circle">VS</div>
-                    <div class="team">${match.visitante}</div>
+                <div style="text-align:center; padding:15px 0; font-size:1.2rem; font-weight:bold">
+                    ${g.local} <span style="color:var(--orange)">VS</span> ${g.visita}
                 </div>
-                <div class="game-meta" style="justify-content: center; background: white; border-top: 1px dashed #ddd;">
-                    <span style="color: var(--naranja)">CATEGORÍA: ${match.cat}</span>
-                </div>
+                <div style="text-align:center; font-size:0.8rem; color:var(--orange)">${g.cat}</div>
             </div>
         `;
-        container.innerHTML += card;
     });
 }
 
-// RENDERIZADO DE SANCIONES
 function renderSanciones() {
-    const tbody = document.getElementById('sanciones-list');
-    LIGA_DATA.sanciones.forEach(s => {
-        const row = `
+    const list = document.getElementById('sanciones-list');
+    LIGA_DB.sanciones.forEach(s => {
+        list.innerHTML += `
             <tr>
-                <td><strong>${s.sujeto}</strong></td>
+                <td><strong>${s.nombre}</strong></td>
                 <td>${s.motivo}</td>
-                <td>${s.tiempo}</td>
-                <td><span class="status-pill">${s.estado}</span></td>
+                <td>${s.castigo}</td>
+                <td style="color:red; font-weight:bold">${s.status}</td>
             </tr>
         `;
-        tbody.innerHTML += row;
     });
 }
 
-// FUNCIÓN AUXILIAR PARA BOTONES HERO
-function navigateTo(sectionName) {
-    const link = document.querySelector(`[data-section="${sectionName}"]`);
-    if(link) link.click();
+function navigateTo(section) {
+    document.querySelector(`[data-section="${section}"]`).click();
 }

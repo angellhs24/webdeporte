@@ -13,9 +13,7 @@
     <header>
         <nav class="navbar">
             <div class="logo-area" onclick="navigateTo('inicio')">
-                <div class="ball-icon">
-                    <i class="fas fa-basketball-ball"></i>
-                </div>
+                <i class="fas fa-basketball-ball ball-icon"></i>
                 <div class="brand-text">
                     <span class="league-name">SIERRA JUÁREZ</span>
                     <span class="league-sub">LIGA DE BASQUETBOL</span>
@@ -26,15 +24,9 @@
                 <li><a href="#" class="nav-link active" data-section="inicio">INICIO</a></li>
                 <li><a href="#" class="nav-link" data-section="sabado">SÁBADO</a></li>
                 <li><a href="#" class="nav-link" data-section="domingo">DOMINGO</a></li>
+                <li><a href="#" class="nav-link" data-section="reglamento">REGLAMENTO</a></li>
                 <li><a href="#" class="nav-link" data-section="sanciones">SANCIONES</a></li>
             </ul>
-
-            <div class="nav-actions">
-                <div class="search-bar">
-                    <input type="text" placeholder="Buscar equipo...">
-                    <i class="fas fa-search"></i>
-                </div>
-            </div>
         </nav>
     </header>
 
@@ -44,89 +36,117 @@
             <div class="hero-banner">
                 <div class="hero-overlay">
                     <div class="hero-content">
-                        <span class="badge">TEMPORADA 2026</span>
-                        <h1>EL CORAZÓN DEL JUEGO</h1>
-                        <p>Resultados, estadísticas y toda la emoción de la Liga Sierra Juárez en un solo lugar.</p>
+                        <span class="promo-badge">AVISO IMPORTANTE</span>
+                        <h1>PAGOS Y TESORERÍA</h1>
+                        <p>Los siguientes equipos deben pasar a Tesorería: <strong>Viejos Lobos, Eagles, Bruins y Linkers B.</strong></p>
                         <div class="hero-btns">
-                            <button class="btn btn-orange" onclick="navigateTo('sabado')">Ver Rol de Juegos</button>
-                            <button class="btn btn-outline">Leer Reglamento</button>
+                            <button class="btn btn-orange" onclick="navigateTo('reglamento')">Ver Reglamento Completo</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="content-container">
-                <div class="grid-layout">
-                    <div class="info-block">
-                        <h2 class="title-accent">Reglamento General</h2>
-                        <div class="rules-card">
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> Uniforme completo obligatorio.</li>
-                                <li><i class="fas fa-check-circle"></i> 15 minutos de tolerancia para el primer juego.</li>
-                                <li><i class="fas fa-check-circle"></i> Respeto absoluto al cuerpo arbitral.</li>
-                            </ul>
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h2 class="accent-title">Trámites y Pagos</h2>
+                        <div class="card-glass">
+                            <p><strong><i class="fas fa-university"></i> Pagos Bancarios:</strong> Si realiza su pago vía bancaria, es obligatorio presentar su voucher el domingo.</p>
+                            <p><strong><i class="fas fa-id-card"></i> Credenciales:</strong> Se entregan al anotador al inicio del juego. Después de este lapso, dependerá de si se ha cerrado la hoja.</p>
+                            <p><strong><i class="fas fa-clock"></i> Altas y Permisos:</strong> Si juega domingo 7:45 AM, tramite sus altas el sábado anterior de 9:00 a 13:00 hrs.</p>
                         </div>
                     </div>
-                    <div class="info-block">
-                        <h2 class="title-accent">Anuncios Recientes</h2>
-                        <div class="announcement-cards">
-                            <div class="news-card">
-                                <span class="date">02 ABR</span>
-                                <h4>Junta de Capitanes</h4>
-                                <p>Este viernes a las 19:00 hrs en el auditorio municipal.</p>
-                            </div>
-                            <div class="news-card">
-                                <span class="date">30 MAR</span>
-                                <h4>Cierre de Registros</h4>
-                                <p>Última semana para dar de alta jugadores nuevos.</p>
-                            </div>
+                    <div class="info-box">
+                        <h2 class="accent-title">Anuncios de Oficina</h2>
+                        <div class="news-item">
+                            <span class="news-date">Urgente</span>
+                            <h4>Apelaciones</h4>
+                            <p>Deberá presentarse por escrito el lunes inmediato al evento de 16:00 a 20:00 hrs en la oficina de la liga.</p>
                         </div>
+                        <div class="news-item">
+                            <span class="news-date">Salud</span>
+                            <h4>Chequeo Médico</h4>
+                            <p>Por su seguridad y rendimiento, le sugerimos realizarse un chequeo médico preventivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reglamento" class="section">
+            <div class="container">
+                <h2 class="accent-title">REGLAMENTO TÉCNICO Y ARTÍCULO 47.3</h2>
+                
+                <div class="rules-container">
+                    <div class="article-box">
+                        <h3>Art. 47.3 - Principios de Arbitraje</h3>
+                        <p>Los árbitros deberán considerar y sopesar en cada caso:</p>
+                        <ul>
+                            <li><strong>Integridad:</strong> El espíritu y propósito de las reglas.</li>
+                            <li><strong>Ventaja/Desventaja:</strong> No interrumpir el juego por contactos incidentales que no conceden ventaja al infractor.</li>
+                            <li><strong>Sentido Común:</strong> Aplicación consistente según el talento y actitud de los jugadores.</li>
+                            <li><strong>Fluidez:</strong> Equilibrio entre el control del partido y el ritmo de juego.</li>
+                        </ul>
+                    </div>
+
+                    <div class="article-box">
+                        <h3>Dinámica del Partido</h3>
+                        <ul>
+                            <li><strong>Duración:</strong> Cuatro cuartos de 10 minutos cada uno (Tiempo corrido).</li>
+                            <li><strong>Finales:</strong> Solo se cronometra el último minuto del último cuarto si la ventaja es de 3 puntos o menor.</li>
+                            <li><strong>Permisos de Ausencia:</strong> Se pierden administrativamente los puntos por razones de tiempo. Se solicitan una semana antes.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="partidos-view" class="section">
-            <div class="content-container">
-                <div class="section-header">
-                    <h2 id="view-title">ROL DE JUEGOS</h2>
-                    <div class="filters">
-                        <button class="filter-chip active">TODOS</button>
-                        <button class="filter-chip">VARONIL</button>
-                        <button class="filter-chip">FEMENIL</button>
-                    </div>
-                </div>
-                
-                <div id="games-grid" class="games-grid">
-                    </div>
+            <div class="container">
+                <h2 id="view-title" class="accent-title">ROL DE JUEGOS</h2>
+                <div id="games-container" class="games-grid"></div>
             </div>
         </section>
 
         <section id="sanciones" class="section">
-            <div class="content-container">
-                <h2 class="title-accent">REPORTE DE DISCIPLINA</h2>
-                <div class="table-responsive">
-                    <table class="modern-table">
+            <div class="container">
+                <h2 class="accent-title">REPORTE DISCIPLINARIO</h2>
+                <div class="table-wrapper">
+                    <table class="sport-table">
                         <thead>
                             <tr>
                                 <th>JUGADOR / EQUIPO</th>
                                 <th>MOTIVO</th>
-                                <th>DURACIÓN</th>
+                                <th>SANCIÓN</th>
                                 <th>ESTADO</th>
                             </tr>
                         </thead>
-                        <tbody id="sanciones-list">
-                            </tbody>
+                        <tbody id="sanciones-list"></tbody>
                     </table>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2026 Liga de Basquetbol Sierra Juárez | <i class="fas fa-basketball-ball"></i></p>
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h3><i class="fas fa-basketball-ball"></i> LIGA SIERRA JUÁREZ</h3>
+                <p>Fomentando el deporte y la disciplina en nuestra comunidad desde hace más de 10 años.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-phone"></i> (044) 55 2067 1046</p>
+                <p><i class="fas fa-envelope"></i> contacto@sierrajuarezliga.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av Oceanía s/n, Pensador Mexicano, Venustiano Carranza, 15510 Ciudad de México, CDMX </p>
+            </div>
+            <div class="footer-hours">
+                <h4>Oficina</h4>
+                <p> Sábado y Domingo: 09:00 - 13:00 hrs</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Liga Sierra Juárez - Todos los derechos reservados.</p>
         </div>
     </footer>
 
