@@ -234,11 +234,45 @@ header {
     color: #666; 
 }
 
-/* --- RESPONSIVE --- */
+/* --- MEJORA RESPONSIVA TOTAL --- */
 @media (max-width: 768px) {
-    .info-grid, .rules-container { grid-template-columns: 1fr; }
-    .hero-content h1 { font-size: 2.2rem; }
-    .nav-menu { display: none; } /* Aquí podrías implementar un menú hamburguesa más tarde */
-    .games-grid { grid-template-columns: 1fr; }
-    .hero-banner { height: auto; padding: 80px 0; }
+    header {
+        padding: 1rem 2%;
+    }
+
+    .navbar {
+        flex-direction: column; /* Logo arriba, menú abajo */
+        gap: 15px;
+    }
+
+    .nav-menu {
+        display: flex; /* Lo volvemos a mostrar */
+        width: 100%;
+        overflow-x: auto; /* Permitir scroll horizontal si hay muchos items */
+        justify-content: flex-start;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-link {
+        white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-banner {
+        height: 50vh;
+    }
+
+    .info-grid, .rules-container, .games-grid {
+        grid-template-columns: 1fr; /* Todo en una sola columna */
+    }
+
+    .accent-title {
+        font-size: 1.5rem;
+    }
 }
