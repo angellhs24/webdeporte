@@ -1,14 +1,135 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sierra Juárez | Liga de Basquetbol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo-area" onclick="navigateTo('inicio')">
+                <div class="ball-icon">
+                    <i class="fas fa-basketball-ball"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="league-name">SIERRA JUÁREZ</span>
+                    <span class="league-sub">LIGA DE BASQUETBOL</span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-section="inicio">INICIO</a></li>
+                <li><a href="#" class="nav-link" data-section="sabado">SÁBADO</a></li>
+                <li><a href="#" class="nav-link" data-section="domingo">DOMINGO</a></li>
+                <li><a href="#" class="nav-link" data-section="sanciones">SANCIONES</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar equipo...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        
+        <section id="inicio" class="section active">
+            <div class="hero-banner">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <span class="badge">TEMPORADA 2026</span>
+                        <h1>EL CORAZÓN DEL JUEGO</h1>
+                        <p>Resultados, estadísticas y toda la emoción de la Liga Sierra Juárez en un solo lugar.</p>
+                        <div class="hero-btns">
+                            <button class="btn btn-orange" onclick="navigateTo('sabado')">Ver Rol de Juegos</button>
+                            <button class="btn btn-outline">Leer Reglamento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container">
+                <div class="grid-layout">
+                    <div class="info-block">
+                        <h2 class="title-accent">Reglamento General</h2>
+                        <div class="rules-card">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Uniforme completo obligatorio.</li>
+                                <li><i class="fas fa-check-circle"></i> 15 minutos de tolerancia para el primer juego.</li>
+                                <li><i class="fas fa-check-circle"></i> Respeto absoluto al cuerpo arbitral.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <h2 class="title-accent">Anuncios Recientes</h2>
+                        <div class="announcement-cards">
+                            <div class="news-card">
+                                <span class="date">02 ABR</span>
+                                <h4>Junta de Capitanes</h4>
+                                <p>Este viernes a las 19:00 hrs en el auditorio municipal.</p>
+                            </div>
+                            <div class="news-card">
+                                <span class="date">30 MAR</span>
+                                <h4>Cierre de Registros</h4>
+                                <p>Última semana para dar de alta jugadores nuevos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="partidos-view" class="section">
+            <div class="content-container">
+                <div class="section-header">
+                    <h2 id="view-title">ROL DE JUEGOS</h2>
+                    <div class="filters">
+                        <button class="filter-chip active">TODOS</button>
+                        <button class="filter-chip">VARONIL</button>
+                        <button class="filter-chip">FEMENIL</button>
+                    </div>
+                </div>
+                
+                <div id="games-grid" class="games-grid">
+                    </div>
+            </div>
+        </section>
+
+        <section id="sanciones" class="section">
+            <div class="content-container">
+                <h2 class="title-accent">REPORTE DE DISCIPLINA</h2>
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>JUGADOR / EQUIPO</th>
+                                <th>MOTIVO</th>
+                                <th>DURACIÓN</th>
+                                <th>ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sanciones-list">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Liga de Basquetbol Sierra Juárez | <i class="fas fa-basketball-ball"></i></p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
