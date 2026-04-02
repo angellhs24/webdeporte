@@ -104,9 +104,19 @@
         <section id="partidos-view" class="section">
             <div class="container">
                 <h2 id="view-title" class="accent-title">ROL DE JUEGOS</h2>
+                
+                <div class="search-container" style="margin-bottom: 20px;">
+                    <div style="position: relative;">
+                        <i class="fas fa-search" style="position: absolute; left: 15px; top: 12px; color: #888;"></i>
+                        <input type="text" id="game-search" placeholder="Buscar equipo (ej: Titanes)..." 
+                               style="width: 100%; padding: 12px 12px 12px 45px; border-radius: 25px; border: 1px solid #ddd; font-family: 'Roboto', sans-serif;">
+                    </div>
+                </div>
+        
                 <div id="games-container" class="games-grid"></div>
             </div>
         </section>
+        
 
         <section id="sanciones" class="section">
             <div class="container">
