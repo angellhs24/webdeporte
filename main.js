@@ -1,32 +1,31 @@
 /**
- * LIGA DE BASQUETBOL SIERRA JUÁREZ - CORE LOGIC
- * Optimizado para rendimiento y visualización de gran volumen de datos
+ * LIGA DE BASQUETBOL SIERRA JUÁREZ 
+ * Versión Compacta con Agrupamiento por Cancha (7 a Central)
  */
 
 const LIGA_DB = {
-    sabado: generateGames("SÁBADO"),
-    domingo: generateGames("DOMINGO"),
+    sabado: generateGames(),
+    domingo: generateGames(),
     sanciones: [
         { nombre: "Carlos R. (Bruins)", motivo: "Falta Técnica Art. 47", castigo: "1 Partido", status: "Pendiente", cat: "Varonil B" },
         { nombre: "Luis M. (Viejos Lobos)", motivo: "Acumulación de amarillas", castigo: "2 Partidos", status: "Activa", cat: "Veteranos" },
-        { nombre: "Equipo Linkers B", motivo: "Falta de pago Tesorería", castigo: "Suspensión Temporal", status: "Urgente", cat: "Varonil B" }
+        { nombre: "Equipo Linkers B", motivo: "Falta de pago Tesorería", castigo: "Suspensión", status: "Urgente", cat: "Varonil B" }
     ]
 };
 
-// Función auxiliar para generar los 40 partidos por día solicitados
-function generateGames(dia) {
-    const juegos = [];
-    const canchas = ["Cancha Central", "Cancha 1", "Cancha 2", "Cancha 3", "Cancha 4", "Cancha 5", "Cancha 6", "Cancha 7"];
+function generateGames() {
+    const data = {};
+    // Orden solicitado: del 7 al 1 y luego Central
+    const canchas = ["Cancha Central", "Cancha 7", "Cancha 6", "Cancha 5", "Cancha 4", "Cancha 3", "Cancha 2", "Cancha 1"];
     const equipos = ["TITANES", "AZTECAS", "LOBOS", "EAGLES", "BRUINS", "LINKERS", "DRAGONES", "WARRIORS", "COBRAS", "REBELDES"];
     const tipos = ["CAMP", "PRACT", "OFICIAL"];
     const categorias = ["Varonil Libre", "Veteranos", "Juvenil", "Femenil"];
 
     canchas.forEach(cancha => {
+        data[cancha] = [];
         for (let i = 0; i < 5; i++) {
-            const hora = `${8 + i}:00 AM`;
-            juegos.push({
-                lugar: cancha,
-                hora: hora,
+            data[cancha].push({
+                hora: `${7 + i}:45 AM`,
                 local: equipos[Math.floor(Math.random() * equipos.length)],
                 visita: equipos[Math.floor(Math.random() * equipos.length)],
                 tipo: tipos[Math.floor(Math.random() * tipos.length)],
@@ -34,7 +33,7 @@ function generateGames(dia) {
             });
         }
     });
-    return juegos;
+    return data;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,62 +45,60 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = link.getAttribute('data-section');
 
-            // UI Update: Active Links
             links.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
 
-            // UI Update: Sections
             sections.forEach(s => s.classList.remove('active'));
             
             if (target === 'sabado' || target === 'domingo') {
-                renderGames(target);
+                renderGamesByCancha(target);
                 document.getElementById('partidos-view').classList.add('active');
             } else if (target === 'sanciones') {
-                renderSanciones(); // Ahora renderiza con el nuevo formato
+                renderSancionesCards();
                 document.getElementById('sanciones').classList.add('active');
             } else {
                 document.getElementById(target).classList.add('active');
             }
         });
     });
-
-    // Carga inicial de sanciones
-    renderSanciones();
 });
 
-function renderGames(dia) {
+function renderGamesByCancha(dia) {
     const container = document.getElementById('games-container');
     const title = document.getElementById('view-title');
     title.innerText = `ROL DE JUEGOS - ${dia.toUpperCase()}`;
     
-    // Limpiamos y usamos un fragmento o string acumulado para no saturar el reflow
     let htmlContent = '';
+    const dataDia = LIGA_DB[dia];
 
-    LIGA_DB[dia].forEach(g => {
-        htmlContent += `
-            <div class="news-item" style="border-left: 6px solid var(--orange)">
-                <div style="display:flex; justify-content: space-between; font-weight:bold; font-size:0.75rem; color:#666; margin-bottom:10px;">
-                    <span><i class="fas fa-map-marker-alt"></i> ${g.lugar}</span>
-                    <span><i class="fas fa-clock"></i> ${g.hora}</span>
+    // Recorremos el objeto por cancha
+    for (const cancha in dataDia) {
+        // Agregamos el Subtítulo de la Cancha
+        htmlContent += `<h3 class="cancha-title"><i class="fas fa-map-marker-alt"></i> ${cancha.toUpperCase()}</h3>`;
+        
+        dataDia[cancha].forEach(g => {
+            htmlContent += `
+                <div class="game-card-compact">
+                    <div style="display:flex; justify-content: space-between; font-size:0.7rem; color:#888; margin-bottom:5px;">
+                        <span>${g.hora}</span>
+                        <span style="font-weight:bold; color:var(--orange)">${g.tipo}</span>
+                    </div>
+                    <div style="text-align:center; font-weight:700; font-size:0.95rem; margin: 5px 0;">
+                        ${g.local} <span style="color:var(--orange); font-size:0.7rem;">VS</span> ${g.visita}
+                    </div>
+                    <div style="text-align:right; font-size:0.7rem; font-weight:bold; color:#555; border-top: 1px solid #eee; pt:3px;">
+                        ${g.cat}
+                    </div>
                 </div>
-                <div style="text-align:center; padding:10px 0; font-size:1.1rem; font-weight:700;">
-                    ${g.local} <span style="color:var(--orange)">VS</span> ${g.visita}
-                </div>
-                <div style="display:flex; justify-content: space-between; align-items:center; margin-top:10px; border-top: 1px solid #eee; pt: 5px;">
-                    <span style="font-size:0.7rem; background:#eee; padding:2px 6px; border-radius:3px; font-weight:bold;">${g.tipo}</span>
-                    <span style="font-size:0.8rem; color:var(--orange); font-weight:bold;">${g.cat}</span>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
     container.innerHTML = htmlContent;
 }
 
-function renderSanciones() {
-    const container = document.getElementById('sanciones-list'); // Nota: Cambié esto para que sea un contenedor div, no una tabla si prefieres el formato de cards
+function renderSancionesCards() {
+    // Reutilizamos la lógica compacta para sanciones
     const sectionContainer = document.querySelector('#sanciones .container');
-    
-    // Cambiamos el comportamiento: Si quieres el formato de Rol de Juegos, inyectamos un Grid
     sectionContainer.innerHTML = `
         <h2 class="accent-title">REPORTE DISCIPLINARIO</h2>
         <div class="games-grid" id="sanciones-cards-container"></div>
@@ -112,17 +109,17 @@ function renderSanciones() {
 
     LIGA_DB.sanciones.forEach(s => {
         htmlContent += `
-            <div class="news-item" style="border-left: 6px solid #ff0000">
-                <div style="display:flex; justify-content: space-between; font-weight:bold; font-size:0.75rem; color:#666;">
-                    <span>ESTADO: <span style="color:red">${s.status.toUpperCase()}</span></span>
+            <div class="game-card-compact" style="border-left-color: #ff0000">
+                <div style="display:flex; justify-content: space-between; font-size:0.7rem; margin-bottom:5px;">
+                    <span style="color:red; font-weight:bold;">${s.status}</span>
                     <span>${s.cat}</span>
                 </div>
-                <div style="text-align:center; padding:15px 0;">
-                    <div style="font-size:1.2rem; font-weight:bold; color:var(--black)">${s.nombre}</div>
-                    <div style="font-size:0.9rem; color:#555; margin-top:5px;">${s.motivo}</div>
+                <div style="text-align:center; padding:5px 0;">
+                    <div style="font-weight:bold; font-size:1rem;">${s.nombre}</div>
+                    <div style="font-size:0.75rem; color:#666;">${s.motivo}</div>
                 </div>
-                <div style="text-align:center; background: #fff1f1; padding:5px; border-radius:5px; font-weight:bold; color:red; font-size:0.8rem;">
-                    SANCIÓN: ${s.castigo}
+                <div style="font-size:0.7rem; background:#fff1f1; color:red; text-align:center; font-weight:bold; padding:2px; border-radius:3px;">
+                    ${s.castigo}
                 </div>
             </div>
         `;
