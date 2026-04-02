@@ -179,20 +179,3 @@ header {
     .hero-banner { height: auto; padding: 60px 0; }
     .accent-title { font-size: 1.5rem; }
 }
-
-.game-card-compact span[onclick] {
-    transition: transform 0.2s;
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.game-card-compact span[onclick]:hover {
-    transform: scale(1.5);
-}
-
-/* Efecto suave para el buscador */
-#game-search:focus {
-    outline: none;
-    border-color: var(--orange);
-    box-shadow: 0 0 8px rgba(255, 94, 0, 0.2);
-}
