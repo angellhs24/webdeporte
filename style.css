@@ -15,6 +15,7 @@ body {
     background: var(--light-grey); 
     color: var(--black); 
     line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll lateral molesto */
 }
 
 h1, h2, h3, .league-name, .nav-link, .btn { 
@@ -22,7 +23,7 @@ h1, h2, h3, .league-name, .nav-link, .btn {
     text-transform: uppercase; 
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (Adaptable) --- */
 header { 
     background: var(--black); 
     color: white; 
@@ -33,19 +34,25 @@ header {
     border-bottom: 4px solid var(--orange); 
 }
 
-.navbar { display: flex; justify-content: space-between; align-items: center; }
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-
 .ball-icon { font-size: 2rem; color: var(--orange); }
-
 .brand-text { display: flex; flex-direction: column; }
-
 .league-name { font-size: 1.4rem; line-height: 1; }
-
 .league-sub { font-size: 0.7rem; color: #888; }
 
-.nav-menu { display: flex; list-style: none; gap: 10px; }
+.nav-menu { 
+    display: flex; 
+    list-style: none; 
+    gap: 10px; 
+}
 
 .nav-link { 
     color: white; 
@@ -66,10 +73,8 @@ header {
     align-items: center;
 }
 
-.hero-overlay { padding: 0 10%; width: 100%; }
-
+.hero-overlay { padding: 0 10%; width: 100%; max-width: 1200px; margin: 0 auto; }
 .hero-content h1 { font-size: 3.5rem; color: white; margin-bottom: 10px; line-height: 1.1; }
-
 .hero-content p { color: #eee; font-size: 1.2rem; margin-bottom: 25px; max-width: 600px; }
 
 .promo-badge { 
@@ -84,7 +89,6 @@ header {
 
 /* --- BOTÓN ANIMADO --- */
 .hero-btns { margin-top: 20px; }
-
 .btn {
     display: inline-block;
     padding: 15px 35px;
@@ -99,56 +103,25 @@ header {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 8px 20px rgba(255, 94, 0, 0.3);
 }
+.btn-orange { background: var(--orange); color: white; }
 
-.btn-orange {
-    background: var(--orange);
-    color: white;
-}
-
-/* Efecto de brillo (Sweep) */
 .btn-orange::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     transition: all 0.6s;
 }
-
-.btn-orange:hover {
-    background: var(--orange-dark);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(255, 94, 0, 0.5);
-}
-
-.btn-orange:hover::before {
-    left: 100%;
-}
-
-.btn-orange:active { transform: translateY(-2px); }
+.btn-orange:hover { background: var(--orange-dark); transform: translateY(-5px); box-shadow: 0 12px 25px rgba(255, 94, 0, 0.5); }
+.btn-orange:hover::before { left: 100%; }
 
 /* --- CONTENEDORES --- */
-.container { padding: 40px 5%; }
-
+.container { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
 .section { display: none; opacity: 0; transition: opacity 0.5s ease-in-out; }
-
 .section.active { display: block; opacity: 1; }
+.accent-title { border-left: 6px solid var(--orange); padding-left: 15px; margin-bottom: 30px; font-size: 2rem; }
 
-.accent-title { 
-    border-left: 6px solid var(--orange); 
-    padding-left: 15px; 
-    margin-bottom: 30px; 
-    font-size: 2rem;
-}
-
-/* --- ROL DE JUEGOS (DISEÑO COMPACTO Y GRUPAL) --- */
+/* --- ROL DE JUEGOS Y SANCIONES --- */
 .cancha-title {
     grid-column: 1 / -1;
     background: var(--black);
@@ -157,9 +130,6 @@ header {
     margin: 30px 0 15px 0;
     border-radius: 6px;
     font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
 }
 
 .games-grid { 
@@ -174,105 +144,38 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border-left: 6px solid var(--orange);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     transition: transform 0.3s ease;
 }
-
 .game-card-compact:hover { transform: scale(1.03); }
 
-/* --- GRID INICIO Y NOTICIAS --- */
+/* --- GRID INICIO --- */
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-
 .card-glass { background: white; padding: 25px; border-radius: 12px; box-shadow: var(--shadow); }
-
-.card-glass p { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-
-.news-item { 
-    background: white; 
-    padding: 20px; 
-    border-radius: 12px; 
-    margin-bottom: 15px; 
-    border-left: 4px solid var(--orange); 
-    box-shadow: var(--shadow); 
-}
+.news-item { background: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid var(--orange); box-shadow: var(--shadow); }
 
 /* --- REGLAMENTO --- */
 .rules-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
 .article-box { background: white; padding: 30px; border-radius: 12px; box-shadow: var(--shadow); }
-
-.article-box h3 { color: var(--orange); margin-bottom: 15px; }
-
-.article-box ul { list-style: none; }
-
-.article-box li { margin-bottom: 12px; padding-left: 25px; position: relative; }
-
-.article-box li::before { 
-    content: '🏀'; 
-    position: absolute; 
-    left: 0; 
-    font-size: 0.9rem; 
-}
 
 /* --- FOOTER --- */
 .main-footer { background: var(--black); color: white; padding: 60px 5% 20px; margin-top: 50px; }
-
 .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
 
-.footer-contact h4, .footer-hours h4 { color: var(--orange); margin-bottom: 20px; }
-
-.footer-contact p { margin-bottom: 12px; color: #bbb; }
-
-.footer-bottom { 
-    text-align: center; 
-    border-top: 1px solid #333; 
-    margin-top: 50px; 
-    padding-top: 20px; 
-    font-size: 0.85rem; 
-    color: #666; 
-}
-
-/* --- MEJORA RESPONSIVA TOTAL --- */
+/* --- MEDIA QUERIES (MAGIA PARA MÓVIL SIN DAÑAR PC) --- */
 @media (max-width: 768px) {
-    header {
-        padding: 1rem 2%;
-    }
-
-    .navbar {
-        flex-direction: column; /* Logo arriba, menú abajo */
-        gap: 15px;
-    }
-
-    .nav-menu {
-        display: flex; /* Lo volvemos a mostrar */
-        width: 100%;
-        overflow-x: auto; /* Permitir scroll horizontal si hay muchos items */
-        justify-content: flex-start;
-        padding-bottom: 5px;
+    .navbar { flex-direction: column; gap: 15px; }
+    .nav-menu { 
+        width: 100%; 
+        overflow-x: auto; 
+        justify-content: flex-start; 
+        padding-bottom: 10px;
         -webkit-overflow-scrolling: touch;
     }
-
-    .nav-link {
-        white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
-        font-size: 0.8rem;
-        padding: 6px 10px;
-    }
-
-    .hero-content h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero-banner {
-        height: 50vh;
-    }
-
-    .info-grid, .rules-container, .games-grid {
-        grid-template-columns: 1fr; /* Todo en una sola columna */
-    }
-
-    .accent-title {
-        font-size: 1.5rem;
-    }
+    .nav-link { white-space: nowrap; font-size: 0.8rem; }
+    
+    .hero-content h1 { font-size: 2.2rem; }
+    .info-grid, .rules-container, .games-grid { grid-template-columns: 1fr; }
+    
+    .hero-banner { height: auto; padding: 60px 0; }
+    .accent-title { font-size: 1.5rem; }
 }
